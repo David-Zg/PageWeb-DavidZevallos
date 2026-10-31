@@ -14,6 +14,15 @@ window.SITIO = {
 
   apuntes: [
     {
+      titulo: 'Densidad de estados proyecta',
+      curso: 'Física Computacional',
+      fecha: '2026-10-31',
+      paginas: 5,
+      etiquetas: ['Densidad de estados', 'QuantumEsspreso'],
+      url: 'apuntes/fisica_computacional.html',
+      pdf: ''
+    },
+    {
       titulo: 'Espectrofotómetro: la calibración y las curiosidades de la luz',
       curso: 'Metrología',
       fecha: '2026-10-31',
