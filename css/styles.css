@@ -100,6 +100,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+[hidden] { display: none !important; }
 img { max-width: 100%; display: block; }
 svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -369,39 +370,7 @@ a.apunte:hover { background: rgba(159, 176, 255, 0.08); color: var(--banda-tinta
 .curiosidad__titulo { margin: 0; font-family: var(--f-titulo); font-weight: 600; font-size: 1.3125rem; line-height: 1.25; }
 .curiosidad__texto { font-size: 1.0625rem; color: var(--tinta-3); }
 
-/* ---------- Galería ---------- */
-.galeria {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-auto-rows: 200px;
-  grid-auto-flow: dense;
-  gap: 16px;
-}
-.foto {
-  position: relative; display: flex; flex-direction: column;
-  padding: 0; margin: 0;
-  border: 1px solid var(--tinta);
-  background: var(--superficie);
-  overflow: hidden; cursor: zoom-in;
-  font: inherit; color: inherit; text-align: left;
-}
-.foto--ancha { grid-column: span 2; }
-.foto--alta { grid-row: span 2; }
-.foto--grande { grid-column: span 2; grid-row: span 2; }
-@media (max-width: 560px) {
-  .foto--ancha, .foto--grande { grid-column: auto; }
-}
-.foto img, .foto .hueco { flex: 1 1 auto; min-height: 0; width: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.foto:hover img { transform: scale(1.03); }
-.foto__pie {
-  display: flex; justify-content: space-between; gap: 8px;
-  padding: 10px 12px;
-  background: var(--superficie);
-  border-top: 1px solid var(--linea);
-  font-family: var(--f-dato); font-size: 0.8125rem;
-}
-.foto__lugar { color: var(--gris); }
-
+/* ---------- Hueco (lugar para una imagen que aún no está) ---------- */
 .hueco {
   display: flex; align-items: center; justify-content: center;
   padding: 16px; text-align: center;
@@ -409,32 +378,6 @@ a.apunte:hover { background: rgba(159, 176, 255, 0.08); color: var(--banda-tinta
   background-image: repeating-linear-gradient(135deg, var(--hueco-raya) 0 2px, transparent 2px 14px);
   font-family: var(--f-dato); font-size: 0.8125rem; color: var(--gris);
 }
-
-/* Visor */
-.visor {
-  width: min(1100px, calc(100vw - 32px));
-  max-height: calc(100vh - 32px);
-  padding: 0; border: 1.5px solid var(--tinta);
-  background: var(--superficie); color: var(--tinta);
-}
-.visor::backdrop { background: rgba(10, 14, 19, 0.82); }
-.visor__marco { display: flex; flex-direction: column; }
-.visor__imagen { display: flex; align-items: center; justify-content: center; background: var(--hueco); }
-.visor__imagen img { max-height: calc(100vh - 140px); width: auto; object-fit: contain; }
-.visor__imagen .hueco { width: 100%; aspect-ratio: 3 / 2; max-height: calc(100vh - 140px); font-size: 1rem; }
-.visor__barra {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 10px 12px 10px 18px;
-  border-top: 1px solid var(--linea);
-}
-.visor__pie { font-family: var(--f-dato); font-size: 0.875rem; min-width: 0; }
-.visor__controles { display: flex; align-items: center; gap: 6px; }
-.visor__controles button {
-  width: 44px; height: 44px; display: grid; place-items: center;
-  border: 1.5px solid var(--linea); border-radius: 50%;
-  background: transparent; color: var(--tinta); cursor: pointer;
-}
-.visor__controles button:hover { border-color: var(--tinta); }
 .visor__posicion { font-family: var(--f-dato); font-size: 0.8125rem; color: var(--gris); min-width: 3.5em; text-align: center; font-variant-numeric: tabular-nums; }
 
 /* ---------- Sobre mí ---------- */
@@ -559,3 +502,512 @@ a.vecino:hover { border-color: var(--tinta); color: var(--tinta); }
 .ficha math[display="block"] { font-size: 1.15em; }
 .vecino .insignia { align-self: flex-start; }
 .vecino--derecha .insignia { align-self: flex-end; }
+
+/* ---------- LaTeX (KaTeX) ---------- */
+.katex { font-size: 1.12em; }
+.katex-display { margin: 0; padding-block: 4px; }
+.ecuacion {
+  display: block;
+  margin: 0;
+  padding: 18px 22px;
+  background: var(--superficie);
+  border: 1px solid var(--linea);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.ecuacion .katex-display > .katex { text-align: center; }
+.ecuacion .katex .tag { font-family: var(--f-dato); font-size: 0.78em; color: var(--gris); }
+.ficha .katex-display { text-align: left; }
+.ficha .katex-display > .katex { text-align: left; font-size: 1.25em; }
+.ecuacion-scroll { overflow-x: auto; overflow-y: hidden; }
+.recuadro .katex, .banda .katex { color: inherit; }
+.apunte__titulo .katex { font-size: 1em; }
+@media (max-width: 480px) { .ecuacion { padding: 14px 12px; } }
+@media print { .ecuacion { overflow: visible; } }
+
+/* Equation number: on narrow screens it goes beside the equation (not on top of it)
+   and the box scrolls sideways if the equation doesn't fit. */
+@media (max-width: 700px) {
+  .ecuacion .katex-display > .katex > .katex-html {
+    display: flex; align-items: baseline;
+    width: max-content; min-width: 100%;
+  }
+  .ecuacion .katex-display > .katex > .katex-html > .base:first-child { margin-left: auto; }
+  .ecuacion .katex-display > .katex > .katex-html > .tag {
+    position: static; margin-left: auto; padding-left: 1.2em; flex: none;
+  }
+}
+
+/* =========================================================================
+   LIBROS
+   Portadas propias (no imitan las reales): papel milimetrado sobre un tono
+   de tela, lomo marcado y la ecuación del libro al centro.
+   ========================================================================= */
+:root {
+  --tapa-tinta: #F3F1EA;
+  --ok: #1E7A4E;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) { --ok: #6CCB9A; }
+}
+:root[data-tema="oscuro"] { --ok: #6CCB9A; }
+
+.boton--chico { min-height: 44px; padding: 0 18px; font-size: 0.95rem; background: transparent; cursor: pointer; }
+
+.chip--claro { border-color: var(--linea); color: var(--tinta); }
+.chip--claro:hover { border-color: var(--tinta); }
+.chip--claro[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--papel); }
+
+/* Dato al azar */
+.dato-azar {
+  max-width: 46em;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px 24px;
+  background: var(--superficie);
+  border: 1.5px solid var(--tinta);
+  box-shadow: 6px 6px 0 var(--calido);
+  animation: aparecer 0.35s ease;
+}
+.dato-azar .etiqueta { color: var(--calido); }
+.dato-azar__texto { font-size: 1.2rem; line-height: 1.5; }
+.dato-azar__fuente { font-family: var(--f-dato); font-size: 0.85rem; color: var(--gris); }
+.enlace-boton {
+  padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: var(--acento); text-decoration: underline; text-underline-offset: 0.2em;
+}
+.enlace-boton:hover { color: var(--acento-hover); }
+@keyframes aparecer { from { transform: translateY(6px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .dato-azar { animation: none; } }
+
+/* Estante */
+.estante {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 40px 24px;
+}
+.libro {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 0; border: 0; background: none;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+}
+.libro:focus-visible { outline-offset: 6px; }
+
+.tapa {
+  --tono: #2E3A48;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+  padding: 14px 14px 16px 24px;
+  overflow: hidden;
+  color: var(--tapa-tinta);
+  background-color: var(--tono);
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.28) 0 9px, rgba(255,255,255,0.10) 9px 10px, transparent 10px),
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(160deg, rgba(255,255,255,0.10), transparent 45%, rgba(0,0,0,0.18));
+  background-size: 100% 100%, 14px 14px, 14px 14px, 100% 100%;
+  border-radius: 2px 6px 6px 2px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25), 8px 12px 22px -10px rgba(10,14,19,0.55);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.libro:hover .tapa, .libro:focus-visible .tapa {
+  transform: translateY(-6px) rotate(-1.2deg);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25), 14px 20px 28px -12px rgba(10,14,19,0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tapa { transition: none; }
+  .libro:hover .tapa, .libro:focus-visible .tapa { transform: none; }
+}
+.tapa__serie {
+  display: flex; justify-content: space-between; gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  font-family: var(--f-dato); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+  opacity: 0.85;
+}
+.tapa__ecuacion {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.tapa__ecuacion .katex-display { margin: 0; width: 100%; }
+.tapa__ecuacion .katex { color: var(--tapa-tinta); }
+.tapa__pie { display: flex; flex-direction: column; gap: 6px; }
+.tapa__titulo {
+  font-family: var(--f-titulo); font-weight: 800;
+  font-size: 1.12rem; line-height: 1.05; letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.tapa__autor { font-family: var(--f-dato); font-size: 0.68rem; line-height: 1.35; opacity: 0.85; }
+.tapa--foto { padding: 0; background-image: none; }
+.tapa--foto img { width: 100%; height: 100%; object-fit: cover; }
+
+.libro__info { display: flex; flex-direction: column; gap: 4px; }
+.libro__titulo { font-family: var(--f-titulo); font-weight: 600; font-size: 1.06rem; line-height: 1.25; }
+.libro__autor { font-family: var(--f-dato); font-size: 0.78rem; color: var(--gris); }
+
+.estado {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 6px; padding: 3px 10px;
+  border: 1px solid currentColor; border-radius: 999px;
+  font-family: var(--f-dato); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+.estado--leido { color: var(--ok); }
+.estado--leyendo { color: var(--acento); }
+.estado--por-leer { color: var(--gris); }
+.estado { white-space: nowrap; }
+.estado-caja { display: flex; flex-direction: column; gap: 8px; align-self: stretch; }
+.estado-caja .estado { color: var(--acento); }
+.estado__barra { display: block; width: 100%; max-width: 140px; height: 4px; border-radius: 2px; background: var(--linea); overflow: hidden; color: var(--acento); }
+.estado__barra > span { display: block; height: 100%; background: currentColor; }
+
+/* Ficha del libro */
+.ficha-libro {
+  width: min(1000px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0; overflow: hidden;
+  border: 1.5px solid var(--tinta);
+  background: var(--superficie); color: var(--tinta);
+}
+.ficha-libro::backdrop { background: rgba(10, 14, 19, 0.82); }
+.ficha-libro__marco {
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) minmax(0, 1fr);
+}
+.ficha-libro__portada {
+  padding: 32px 28px;
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--rejilla) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rejilla) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-right: 1px solid var(--linea);
+}
+.ficha-libro__portada .tapa { position: sticky; top: 32px; }
+.ficha-libro__texto { min-width: 0; padding: 32px 36px 28px; display: flex; flex-direction: column; gap: 10px; }
+.ficha-libro__titulo {
+  margin: 0;
+  font-family: var(--f-titulo); font-weight: 800;
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem); line-height: 1.04; letter-spacing: -0.02em;
+}
+.ficha-libro__autor { font-family: var(--f-dato); font-size: 0.92rem; color: var(--gris); }
+.ficha-libro__bloque { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; padding-top: 16px; border-top: 1px solid var(--linea); }
+.ficha-libro__comentario { font-size: 1.08rem; }
+.ficha-libro__pendiente { font-style: italic; color: var(--gris); font-size: 1.02rem; }
+.ficha-libro__curiosas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.ficha-libro__curiosas li { position: relative; padding-left: 1.5em; font-size: 1.04rem; line-height: 1.55; }
+.ficha-libro__curiosas li::before {
+  content: ""; position: absolute; left: 0.2em; top: 0.62em;
+  width: 7px; height: 7px; background: var(--calido); transform: rotate(45deg);
+}
+.ficha-libro__ecuacion {
+  padding: 14px 16px; overflow-x: auto; overflow-y: hidden;
+  background: var(--papel); border: 1px solid var(--linea);
+}
+.ficha-libro__ecuacion .katex-display { margin: 0; }
+.ficha-libro__nota { font-size: 1rem; color: var(--tinta-3); }
+.ficha-libro__barra {
+  grid-column: 1 / -1;
+  position: sticky; bottom: 0;
+  display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+  padding: 10px 12px;
+  background: var(--superficie);
+  border-top: 1px solid var(--linea);
+}
+.ficha-libro__barra button {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1.5px solid var(--linea); border-radius: 50%;
+  background: transparent; color: var(--tinta); cursor: pointer;
+}
+.ficha-libro__barra button:hover { border-color: var(--tinta); }
+
+@media (max-width: 720px) {
+  .ficha-libro__marco { grid-template-columns: minmax(0, 1fr); }
+  .ficha-libro__portada { padding: 24px; border-right: 0; border-bottom: 1px solid var(--linea); display: flex; justify-content: center; }
+  .ficha-libro__portada .tapa { position: static; width: min(220px, 60vw); }
+  .ficha-libro__texto { padding: 24px 20px; }
+}
+@media (max-width: 1100px) { .estante { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; } }
+@media (max-width: 480px) {
+  .estante { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+  .tapa { padding: 10px 10px 12px 18px; }
+}
+
+/* Tapas: tamaños proporcionales al ancho de cada tapa */
+.tapa { container-type: inline-size; }
+.tapa__serie { font-size: clamp(0.55rem, 5cqi, 0.72rem); white-space: nowrap; }
+.tapa__titulo { font-size: clamp(0.85rem, 8.6cqi, 1.6rem); white-space: normal; overflow-wrap: normal; }
+.tapa__autor { font-size: clamp(0.58rem, 5.2cqi, 0.78rem); }
+.tapa__ecuacion { font-size: clamp(11px, 8cqi, 20px); }
+
+/* =========================================================================
+   LITERATURA: tapas tipográficas con un motivo dibujado
+   ========================================================================= */
+.tapa--literatura {
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.28) 0 9px, rgba(255,255,255,0.10) 9px 10px, transparent 10px),
+    radial-gradient(ellipse at 50% 42%, rgba(255,255,255,0.10), transparent 60%),
+    linear-gradient(160deg, rgba(255,255,255,0.08), transparent 45%, rgba(0,0,0,0.22));
+  background-size: 100% 100%;
+}
+.tapa--literatura .tapa__titulo {
+  font-family: var(--f-texto); font-style: italic; font-weight: 500;
+  letter-spacing: 0; line-height: 1.02;
+  font-size: clamp(1rem, 11cqi, 2rem);
+}
+.tapa--literatura .tapa__serie { border-bottom-style: dotted; }
+.tapa__motivo {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.tapa__motivo svg {
+  width: 62%; max-width: 150px; height: auto;
+  fill: none; stroke: var(--tapa-tinta); stroke-width: 1.6; color: var(--tapa-tinta);
+  opacity: 0.9;
+}
+.ficha-libro__resumen { font-size: 1.08rem; }
+
+/* =========================================================================
+   FOTOS: BITÁCORA
+   Fotos impresas pegadas en el cuaderno: margen blanco, cinta adhesiva,
+   anotación a mano y la reseña al lado. Usa los mismos colores del sitio.
+   ========================================================================= */
+:root {
+  --f-mano: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --impresion: #FFFFFF;
+  --sombra-impresion: rgba(23, 32, 43, 0.28);
+  --cinta: rgba(154, 71, 8, 0.20);
+  --cinta-2: rgba(37, 70, 201, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    --impresion: #222B36;
+    --sombra-impresion: rgba(0, 0, 0, 0.55);
+    --cinta: rgba(232, 162, 102, 0.24);
+    --cinta-2: rgba(147, 166, 255, 0.20);
+  }
+}
+:root[data-tema="oscuro"] {
+  --impresion: #222B36;
+  --sombra-impresion: rgba(0, 0, 0, 0.55);
+  --cinta: rgba(232, 162, 102, 0.24);
+  --cinta-2: rgba(147, 166, 255, 0.20);
+}
+
+/* La impresión */
+.impresion {
+  position: relative;
+  display: flex; flex-direction: column;
+  margin: 0;
+  padding: 10px 10px 0;
+  background: var(--impresion);
+  box-shadow: 0 1px 2px rgba(23, 32, 43, 0.10), 0 16px 32px -18px var(--sombra-impresion);
+  transition: transform 0.35s cubic-bezier(.2, .7, .2, 1), box-shadow 0.35s ease;
+}
+/* Cinta adhesiva */
+.impresion::before {
+  content: ""; position: absolute; z-index: 1;
+  top: -10px; left: 50%; width: 96px; height: 24px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: var(--cinta);
+  -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px);
+}
+.impresion__foto { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--hueco); }
+.impresion__foto > * { display: flex; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.impresion__nota {
+  display: block;
+  padding: 8px 4px 10px;
+  font-family: var(--f-mano); font-size: 1.35rem; line-height: 1.1; font-weight: 500;
+  color: var(--tinta-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Recuadro de ejemplo (sin foto todavía) */
+.foto-vacia {
+  flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  color: var(--gris);
+  font-family: var(--f-dato); font-size: 0.75rem; letter-spacing: 0.04em;
+  background-color: var(--hueco);
+  background-image:
+    radial-gradient(circle at var(--luz-x, 75%) var(--luz-y, 25%), color-mix(in srgb, var(--calido) 22%, transparent), transparent 55%),
+    radial-gradient(circle at calc(100% - var(--luz-x, 75%)) calc(100% - var(--luz-y, 25%)), color-mix(in srgb, var(--acento) 16%, transparent), transparent 60%),
+    linear-gradient(var(--rejilla) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rejilla) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 16px 16px, 16px 16px;
+}
+.foto-vacia svg { stroke-width: 1.5; opacity: 0.7; }
+
+/* ---- Foto destacada ---- */
+.destacada {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 56px; align-items: center;
+  padding-block: 8px 24px;
+}
+.destacada__boton { padding: 0; border: 0; background: none; cursor: zoom-in; color: inherit; font: inherit; display: block; width: 100%; }
+.impresion--destacada { padding: 14px 14px 0; transform: rotate(-1.2deg); }
+.impresion--destacada .impresion__foto { aspect-ratio: 3 / 2; }
+.impresion--destacada .impresion__nota { font-size: 1.8rem; padding: 10px 6px 14px; }
+.impresion--destacada::before { left: 18%; width: 110px; transform: translateX(-50%) rotate(-6deg); }
+.impresion--destacada::after {
+  content: ""; position: absolute; z-index: 1;
+  top: -10px; right: 6%; width: 110px; height: 24px;
+  transform: rotate(5deg);
+  background: var(--cinta-2);
+}
+.destacada__boton:hover .impresion--destacada,
+.destacada__boton:focus-visible .impresion--destacada { transform: rotate(0deg) translateY(-4px); box-shadow: 0 1px 2px rgba(23,32,43,.10), 0 26px 44px -20px var(--sombra-impresion); }
+.destacada__boton:hover .impresion__foto > * { transform: scale(1.03); }
+
+.destacada__texto { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.destacada__texto .etiqueta { color: var(--calido); }
+.destacada__titulo {
+  margin: 0;
+  font-family: var(--f-titulo); font-weight: 800;
+  font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.02; letter-spacing: -0.02em;
+}
+.destacada__meta { font-family: var(--f-dato); font-size: 0.85rem; color: var(--gris); }
+.destacada__resena { display: flex; flex-direction: column; gap: 12px; max-width: 36em; }
+.destacada__resena .resena { font-size: 1.15rem; line-height: 1.65; color: var(--tinta-2); }
+.destacada__resena .resena:first-child::first-letter {
+  float: left;
+  font-family: var(--f-titulo); font-weight: 800;
+  font-size: 3.4em; line-height: 0.82;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--calido);
+}
+
+/* ---- Hojas (el resto de las fotos) ---- */
+.hojas {
+  list-style: none; margin: 16px 0 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 40px;
+}
+@media (max-width: 960px) { .hojas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .hojas { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+
+.hoja {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 0; border: 0; background: none;
+  color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.hoja:focus-visible { outline-offset: 8px; }
+/* Cada impresión queda pegada con una inclinación distinta */
+.hojas > li:nth-child(3n+1) .impresion { transform: rotate(-1.4deg); }
+.hojas > li:nth-child(3n+2) .impresion { transform: rotate(0.9deg); }
+.hojas > li:nth-child(3n+2) .impresion::before { background: var(--cinta-2); transform: translateX(-50%) rotate(4deg); }
+.hojas > li:nth-child(3n) .impresion { transform: rotate(-0.5deg); }
+.hoja:hover .impresion, .hoja:focus-visible .impresion {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 1px 2px rgba(23,32,43,.10), 0 26px 40px -20px var(--sombra-impresion);
+}
+.hoja:hover .impresion__foto > * { transform: scale(1.04); }
+
+.hoja__texto { display: flex; flex-direction: column; gap: 6px; padding-inline: 4px; }
+.hoja__meta { font-family: var(--f-dato); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--gris); font-variant-numeric: tabular-nums; }
+.hoja__titulo { font-family: var(--f-titulo); font-weight: 600; font-size: 1.2rem; line-height: 1.25; }
+.hoja__resena {
+  font-size: 1.02rem; line-height: 1.55; color: var(--tinta-3);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
+.hoja__leer { font-family: var(--f-dato); font-size: 0.8rem; color: var(--acento); padding-top: 2px; }
+.hoja:hover .hoja__leer { text-decoration: underline; text-underline-offset: 0.25em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .impresion, .impresion__foto > * { transition: none; }
+  .hoja:hover .impresion, .destacada__boton:hover .impresion--destacada { transform: none; }
+  .hoja:hover .impresion__foto > *, .destacada__boton:hover .impresion__foto > * { transform: none; }
+}
+
+@media (max-width: 860px) {
+  .destacada { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+}
+
+/* ---- Visor ---- */
+.visor-foto {
+  width: min(1200px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0; overflow: hidden;
+  border: 1.5px solid var(--tinta);
+  background: var(--superficie); color: var(--tinta);
+}
+.visor-foto::backdrop { background: rgba(16, 21, 28, 0.72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.visor-foto__marco {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  max-height: calc(100dvh - 36px);
+}
+.visor-foto__lamina {
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 44px 40px;
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--rejilla) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rejilla) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-right: 1px solid var(--linea);
+}
+.impresion--grande { padding: 14px 14px 0; max-width: 100%; }
+.impresion--grande .impresion__foto { aspect-ratio: auto; background: none; }
+.impresion--grande .impresion__foto > img { width: auto; height: auto; max-width: 100%; max-height: calc(100dvh - 230px); }
+.impresion--grande .impresion__foto > .foto-vacia { width: min(680px, 52vw); aspect-ratio: 3 / 2; max-height: calc(100dvh - 230px); font-size: 0.85rem; }
+.impresion--grande .impresion__nota { font-size: 1.7rem; padding: 10px 6px 14px; }
+.impresion--grande.cambiando { animation: posar 0.45s cubic-bezier(.2, .7, .2, 1); }
+@keyframes posar { from { opacity: 0; transform: translateY(10px) rotate(-1deg); } to { opacity: 1; transform: none; } }
+
+.visor-foto__texto {
+  min-width: 0; min-height: 0; overflow-y: auto;
+  padding: 40px 36px 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.visor-foto__texto .etiqueta { color: var(--calido); }
+.visor-foto__titulo {
+  margin: 0;
+  font-family: var(--f-titulo); font-weight: 800;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem); line-height: 1.04; letter-spacing: -0.02em;
+}
+.visor-foto__meta { font-family: var(--f-dato); font-size: 0.85rem; color: var(--gris); }
+.visor-foto__resena {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 10px; padding-top: 18px;
+  border-top: 1px solid var(--linea);
+}
+.visor-foto__resena .resena { font-size: 1.1rem; line-height: 1.65; color: var(--tinta-2); }
+.resena--pendiente { font-style: italic; color: var(--gris); }
+.visor-foto__tecnica { margin-top: 6px; font-family: var(--f-dato); font-size: 0.78rem; color: var(--gris); }
+
+.visor-foto__barra {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--linea);
+  background: var(--superficie);
+}
+.visor-foto__barra button {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1.5px solid var(--linea); border-radius: 50%;
+  background: transparent; color: var(--tinta); cursor: pointer;
+}
+.visor-foto__barra button:hover { border-color: var(--tinta); }
+
+@media (max-width: 760px) {
+  .visor-foto__marco { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; overflow-y: auto; }
+  .visor-foto__lamina { padding: 28px 20px; border-right: 0; border-bottom: 1px solid var(--linea); }
+  .impresion--grande .impresion__foto > img { max-height: 52dvh; }
+  .impresion--grande .impresion__foto > .foto-vacia { width: 78vw; }
+  .visor-foto__texto { overflow: visible; padding: 24px 20px; }
+  .visor-foto__barra { position: sticky; bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .impresion--grande.cambiando { animation: none; } }

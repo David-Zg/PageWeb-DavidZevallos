@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>David Zevallos · Física</title>
-  <meta name="description" content="Apuntes de clase y cosas curiosas de David Zevallos, físico en la UNMSM.">
+  <meta name="description" content="Apuntes de clase, cosas curiosas, libros y fotos de David Zevallos, físico en la UNMSM.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%2317202B'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='24' font-weight='700' fill='%23F4F6F3' text-anchor='middle'%3EDZ%3C/text%3E%3C/svg%3E">
 
@@ -18,9 +18,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
   <link rel="stylesheet" href="css/styles.css">
 
+  <script src="vendor/katex/katex.min.js" defer></script>
+  <script src="vendor/katex/auto-render.min.js" defer></script>
+  <script src="js/latex.js" defer></script>
   <script src="js/datos.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
@@ -42,7 +46,8 @@
       <nav id="menu-principal" class="menu" aria-label="Secciones">
         <a href="#apuntes">Apuntes</a>
         <a href="#curiosidades">Curiosidades</a>
-        <!-- <a href="#fotos">Fotos</a> -->
+        <a href="#libros">Libros</a>
+        <a href="#fotos">Fotos</a>
         <a href="#sobre-mi">Sobre mí</a>
         <button class="tema-boton" type="button" aria-label="Cambiar a tema oscuro">
           <svg class="icono-luna" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -59,34 +64,20 @@
       <div class="portada__texto">
         <p class="etiqueta">Cuaderno abierto · Lima, Perú</p>
         <h1 id="titulo-portada" class="portada__titulo">David Zevallos</h1>
-        <p class="portada__intro">Estudio física y trabajo con superconductores mesoscópicos. Aquí guardo mis apuntes de clase y las cosas curiosas que voy encontrando.</p>
+        <p class="portada__intro">Estudio física y trabajo con superconductores mesoscópicos. Aquí guardo mis apuntes de clase, las cosas curiosas que voy encontrando, lo que leo y algunas fotos.</p>
         <div class="acciones">
           <a class="boton boton--lleno" href="#apuntes">
             Ver apuntes
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <!-- <a class="boton boton--borde" href="#fotos">Fotos</a> -->
+          <a class="boton boton--borde" href="#fotos">Fotos</a>
         </div>
       </div>
 
       <aside class="ficha" aria-label="Tema de investigación">
         <div class="ficha__cabeza"><span>Ec. (1)</span><span>Tesis de maestría</span></div>
         <div class="ecuacion-scroll">
-          <math display="block">
-            <mrow>
-              <mi mathvariant="normal">Δ</mi><msub><mi>S</mi><mi>M</mi></msub>
-              <mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>H</mi><mo stretchy="false">)</mo>
-              <mo>=</mo>
-              <msub><mi>μ</mi><mn>0</mn></msub>
-              <msubsup><mo>∫</mo><mn>0</mn><mi>H</mi></msubsup>
-              <msub>
-                <mrow><mo>(</mo><mfrac><mrow><mo>∂</mo><mi>M</mi></mrow><mrow><mo>∂</mo><mi>T</mi></mrow></mfrac><mo>)</mo></mrow>
-                <msup><mi>H</mi><mo>′</mo></msup>
-              </msub>
-              <mspace width="0.2em"></mspace>
-              <mi mathvariant="normal">d</mi><msup><mi>H</mi><mo>′</mo></msup>
-            </mrow>
-          </math>
+          $$\Delta S_M(T,H) = \mu_0 \int_0^{H} \left( \pdv{M}{T} \right)_{H'} \dd H'$$
         </div>
         <p class="ficha__nota">Cambio de entropía magnética: la base del efecto magnetocalórico en superconductores tipo I.</p>
       </aside>
@@ -128,20 +119,53 @@
       <div class="rejilla-curiosidades" id="lista-curiosidades"></div>
     </section>
 
-    <!-- FOTOS (oculta por ahora: quita este comentario para mostrarla)
-    <section id="fotos" class="seccion-borde" aria-labelledby="titulo-fotos">
+    <!-- LIBROS -->
+    <section id="libros" class="seccion-borde libros" aria-labelledby="titulo-libros">
       <div class="contenedor seccion">
         <div class="seccion__cabeza">
           <div>
-            <p class="etiqueta">Fotos</p>
-            <h2 id="titulo-fotos" class="seccion__titulo">Del laboratorio y de fuera</h2>
+            <p class="etiqueta etiqueta--calida">Biblioteca</p>
+            <h2 id="titulo-libros" class="seccion__titulo">Libros en la mesa de noche</h2>
           </div>
-          <p class="contador">Toca una foto para verla completa</p>
+          <p class="contador" id="contador-libros" aria-live="polite"></p>
         </div>
-        <div class="galeria" id="galeria"></div>
+
+        <div class="herramientas">
+          <div class="filtros" id="filtros-libros" role="group" aria-label="Filtrar libros por tema"></div>
+          <button class="boton boton--borde boton--chico" type="button" id="dato-azar">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/></svg>
+            Dato al azar
+          </button>
+        </div>
+
+        <aside class="dato-azar" id="dato-azar-caja" aria-live="polite" hidden>
+          <p class="etiqueta">¿Sabías que…?</p>
+          <p class="dato-azar__texto" id="dato-azar-texto"></p>
+          <p class="dato-azar__fuente" id="dato-azar-fuente"></p>
+        </aside>
+
+        <ul class="estante" id="estante"></ul>
       </div>
     </section>
-    -->
+
+    <!-- FOTOS: BITÁCORA -->
+    <section id="fotos" class="seccion-borde bitacora" aria-labelledby="titulo-fotos">
+      <div class="contenedor seccion">
+        <div class="seccion__cabeza">
+          <div>
+            <p class="etiqueta etiqueta--calida">Fotos</p>
+            <h2 id="titulo-fotos" class="seccion__titulo">Bitácora de fotos</h2>
+          </div>
+          <p class="contador" id="contador-fotos" aria-live="polite"></p>
+        </div>
+
+        <div class="filtros" id="filtros-fotos" role="group" aria-label="Filtrar fotos por colección"></div>
+
+        <article class="destacada" id="foto-destacada" aria-label="Foto destacada"></article>
+
+        <ul class="hojas" id="hojas"></ul>
+      </div>
+    </section>
 
     <!-- SOBRE MÍ -->
     <section id="sobre-mi" class="superficie seccion-borde" aria-labelledby="titulo-sobre-mi">
@@ -151,10 +175,10 @@
           <h2 id="titulo-sobre-mi" class="seccion__titulo">Hola, soy David</h2>
         </div>
         <div class="sobre-mi__texto">
-          <p>Estudio la maestría en Física en la Facultad de Ciencias Físicas de la UNMSM y trabajo en el Laboratorio de Cerámicos y Nanomateriales. Mi tema es el efecto magnetocalórico en superconductores mesoscópicos tipo I, que estudio con simulaciones numéricas.</p>
+          <p>Estudio la maestría en Física en la Facultad de Ciencias Físicas de la UNMSM y trabajo en el campo de la metrología. Mi tema de estudio es el efecto magnetocalórico en superconductores mesoscópicos tipo I, que estudio con simulaciones numéricas.</p>
           <div class="cita">
             <span class="etiqueta">Publicación</span>
-            <p>Zevallos G. et al. (2026). [Título del artículo]. <i>Journal of Superconductivity and Novel Magnetism</i>.</p>
+            <p>Zevallos G. et al. (2026). The Magnetocaloric Effect in Mesoscopic Type-I Superconducting Needles. <i>Journal of Superconductivity and Novel Magnetism</i>.</p>
           </div>
           <ul class="enlaces">
             <li>
@@ -178,24 +202,76 @@
     </div>
   </footer>
 
-  <!-- VISOR DE FOTOS (elemento nativo <dialog>) -->
-  <dialog class="visor" id="visor" aria-label="Visor de fotos">
-    <div class="visor__marco">
-      <div class="visor__imagen" id="visor-imagen"></div>
-      <div class="visor__barra">
-        <p class="visor__pie" id="visor-pie"></p>
-        <div class="visor__controles">
-          <button type="button" id="visor-anterior" aria-label="Foto anterior">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-          </button>
-          <span id="visor-posicion" class="visor__posicion"></span>
-          <button type="button" id="visor-siguiente" aria-label="Foto siguiente">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-          </button>
-          <button type="button" id="visor-cerrar" aria-label="Cerrar visor">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
-          </button>
+  <!-- FICHA DE LIBRO -->
+  <dialog class="ficha-libro" id="ficha-libro" aria-labelledby="ficha-libro-titulo">
+    <div class="ficha-libro__marco">
+      <div class="ficha-libro__portada" id="ficha-libro-portada"></div>
+      <div class="ficha-libro__texto">
+        <p class="etiqueta" id="ficha-libro-meta"></p>
+        <h3 class="ficha-libro__titulo" id="ficha-libro-titulo"></h3>
+        <p class="ficha-libro__autor" id="ficha-libro-autor"></p>
+        <div id="ficha-libro-estado"></div>
+
+        <div class="ficha-libro__bloque" id="ficha-libro-bloque-resumen">
+          <p class="etiqueta">De qué va</p>
+          <p class="ficha-libro__resumen" id="ficha-libro-resumen"></p>
         </div>
+
+        <div class="ficha-libro__bloque">
+          <p class="etiqueta">Mi comentario</p>
+          <div id="ficha-libro-comentario"></div>
+        </div>
+
+        <div class="ficha-libro__bloque">
+          <p class="etiqueta">Lo curioso</p>
+          <ul class="ficha-libro__curiosas" id="ficha-libro-curiosas"></ul>
+        </div>
+
+        <div class="ficha-libro__bloque" id="ficha-libro-bloque-ecuacion">
+          <p class="etiqueta">La ecuación del libro</p>
+          <div class="ficha-libro__ecuacion" id="ficha-libro-ecuacion"></div>
+          <p class="ficha-libro__nota" id="ficha-libro-nota"></p>
+        </div>
+      </div>
+      <div class="ficha-libro__barra">
+        <button type="button" id="libro-anterior" aria-label="Libro anterior">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <span id="libro-posicion" class="visor__posicion"></span>
+        <button type="button" id="libro-siguiente" aria-label="Libro siguiente">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button type="button" id="libro-cerrar" aria-label="Cerrar ficha">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- VISOR DE FOTOS -->
+  <dialog class="visor-foto" id="visor-foto" aria-labelledby="visor-foto-titulo">
+    <div class="visor-foto__marco">
+      <div class="visor-foto__lamina">
+        <figure class="impresion impresion--grande" id="visor-foto-impresion"></figure>
+      </div>
+      <div class="visor-foto__texto">
+        <p class="etiqueta" id="visor-foto-num"></p>
+        <h3 class="visor-foto__titulo" id="visor-foto-titulo"></h3>
+        <p class="visor-foto__meta" id="visor-foto-meta"></p>
+        <div class="visor-foto__resena" id="visor-foto-resena"></div>
+        <p class="visor-foto__tecnica" id="visor-foto-tecnica" hidden></p>
+      </div>
+      <div class="visor-foto__barra">
+        <button type="button" id="visor-foto-anterior" aria-label="Foto anterior">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <span id="visor-foto-posicion" class="visor__posicion"></span>
+        <button type="button" id="visor-foto-siguiente" aria-label="Foto siguiente">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button type="button" id="visor-foto-cerrar" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
       </div>
     </div>
   </dialog>

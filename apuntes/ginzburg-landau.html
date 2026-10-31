@@ -16,7 +16,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="../vendor/katex/katex.min.css">
   <link rel="stylesheet" href="../css/styles.css">
+  <script src="../vendor/katex/katex.min.js" defer></script>
+  <script src="../vendor/katex/auto-render.min.js" defer></script>
+  <script src="../js/latex.js" defer></script>
   <script src="../js/datos.js" defer></script>
   <script src="../js/main.js" defer></script>
 </head>
@@ -36,7 +40,8 @@
       <nav id="menu-principal" class="menu" aria-label="Secciones">
         <a href="../index.html#apuntes" aria-current="page">Apuntes</a>
         <a href="../index.html#curiosidades">Curiosidades</a>
-        <!-- <a href="../index.html#fotos">Fotos</a> -->
+        <a href="../index.html#libros">Libros</a>
+        <a href="../index.html#fotos">Fotos</a>
         <a href="../index.html#sobre-mi">Sobre mí</a>
         <button class="tema-boton" type="button" aria-label="Cambiar a tema oscuro">
           <svg class="icono-luna" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -56,96 +61,64 @@
         <span>18 pág.</span>
       </p>
       <h1 class="nota__titulo">Teoría de Ginzburg–Landau: longitudes ξ y λ</h1>
-      <p class="nota__entrada">La teoría describe el estado superconductor con un parámetro de orden complejo <math><mi>ψ</mi><mo stretchy="false">(</mo><mi mathvariant="bold">r</mi><mo stretchy="false">)</mo></math>. De ella salen las dos longitudes que deciden si un material es tipo&nbsp;I o tipo&nbsp;II.</p>
+      <p class="nota__entrada">La teoría describe el estado superconductor con un parámetro de orden complejo $\psi(\vb{r})$. De ella salen las dos longitudes que deciden si un material es tipo&nbsp;I o tipo&nbsp;II.</p>
 
-      <!-- 1 -->
       <section id="energia" aria-labelledby="h-energia">
         <h2 id="h-energia"><span class="num">1</span>Energía libre</h2>
       </section>
-      <p>Cerca de <math><msub><mi>T</mi><mi>c</mi></msub></math>, la densidad de energía libre se expande en potencias de <math><msup><mrow><mo lspace="0" rspace="0">|</mo><mi>ψ</mi><mo lspace="0" rspace="0">|</mo></mrow><mn>2</mn></msup></math> y de su gradiente:</p>
-      <figure class="ecuacion">
-        <div class="ecuacion-scroll">
-          <math display="block">
-            <mrow>
-              <msub><mi>f</mi><mi>s</mi></msub><mo>=</mo><msub><mi>f</mi><mi>n</mi></msub>
-              <mo>+</mo><mi>α</mi><msup><mrow><mo lspace="0" rspace="0">|</mo><mi>ψ</mi><mo lspace="0" rspace="0">|</mo></mrow><mn>2</mn></msup>
-              <mo>+</mo><mfrac><mi>β</mi><mn>2</mn></mfrac><msup><mrow><mo lspace="0" rspace="0">|</mo><mi>ψ</mi><mo lspace="0" rspace="0">|</mo></mrow><mn>4</mn></msup>
-              <mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>m</mi><mo>*</mo></msup></mrow></mfrac>
-              <msup>
-                <mrow><mo lspace="0" rspace="0">|</mo><mo>(</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mo>∇</mo><mo>−</mo><msup><mi>e</mi><mo>*</mo></msup><mi mathvariant="bold">A</mi><mo>)</mo><mi>ψ</mi><mo lspace="0" rspace="0">|</mo></mrow>
-                <mn>2</mn>
-              </msup>
-              <mo>+</mo><mfrac><msup><mi>B</mi><mn>2</mn></msup><mrow><mn>2</mn><msub><mi>μ</mi><mn>0</mn></msub></mrow></mfrac>
-            </mrow>
-          </math>
-        </div>
-        <span class="ecuacion__num">(1)</span>
-      </figure>
-      <p>Con <math><mi>α</mi><mo>∝</mo><mo stretchy="false">(</mo><mi>T</mi><mo>−</mo><msub><mi>T</mi><mi>c</mi></msub><mo stretchy="false">)</mo></math> y <math><mi>β</mi><mo>&gt;</mo><mn>0</mn></math>. Por debajo de <math><msub><mi>T</mi><mi>c</mi></msub></math> el mínimo uniforme está en <math><msup><mrow><mo lspace="0" rspace="0">|</mo><mi>ψ</mi><mo lspace="0" rspace="0">|</mo></mrow><mn>2</mn></msup><mo>=</mo><mo lspace="0" rspace="0">|</mo><mi>α</mi><mo lspace="0" rspace="0">|</mo><mo>/</mo><mi>β</mi></math>, que identificamos con la densidad de superelectrones <math><msub><mi>n</mi><mi>s</mi></msub></math>.</p>
+      <p>Cerca de $\tc$, la densidad de energía libre se expande en potencias de $\abs{\psi}^2$ y de su gradiente:</p>
+      <div class="ecuacion">
+        $$
+        f_s = f_n + \alpha \abs{\psi}^2 + \frac{\beta}{2}\abs{\psi}^4
+        + \frac{1}{2m^*}\abs{\left(-i\hbar\grad - e^*\vb{A}\right)\psi}^2
+        + \frac{B^2}{2\mu_0}
+        \tag{1}
+        $$
+      </div>
+      <p>Con $\alpha \propto (T-\tc)$ y $\beta \gt 0$. Por debajo de $\tc$ el mínimo uniforme está en $\abs{\psi}^2 = \abs{\alpha}/\beta,$ que identificamos con la densidad de superelectrones $n_s$.</p>
 
-      <!-- 2 -->
       <section id="xi" aria-labelledby="h-xi">
         <h2 id="h-xi"><span class="num">2</span>Longitud de coherencia</h2>
       </section>
-      <p>Es la distancia en la que <math><mi>ψ</mi></math> puede variar apreciablemente:</p>
-      <figure class="ecuacion">
-        <div class="ecuacion-scroll">
-          <math display="block">
-            <mrow>
-              <mi>ξ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo>
-              <mfrac><mi>ℏ</mi><msqrt><mn>2</mn><msup><mi>m</mi><mo>*</mo></msup><mo lspace="0" rspace="0">|</mo><mi>α</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo lspace="0" rspace="0">|</mo></msqrt></mfrac>
-            </mrow>
-          </math>
-        </div>
-        <span class="ecuacion__num">(2)</span>
-      </figure>
+      <p>Es la distancia en la que $\psi$ puede variar apreciablemente:</p>
+      <div class="ecuacion">
+        $$ \xi(T) = \frac{\hbar}{\sqrt{2m^*\abs{\alpha(T)}}} \tag{2} $$
+      </div>
 
-      <!-- 3 -->
       <section id="lambda" aria-labelledby="h-lambda">
         <h2 id="h-lambda"><span class="num">3</span>Longitud de penetración</h2>
       </section>
       <p>Es la distancia en la que decae el campo magnético dentro del superconductor:</p>
-      <figure class="ecuacion">
-        <div class="ecuacion-scroll">
-          <math display="block">
-            <mrow>
-              <mi>λ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo>
-              <msqrt><mfrac><msup><mi>m</mi><mo>*</mo></msup><mrow><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>n</mi><mi>s</mi></msub><msup><mi>e</mi><mrow><mo>*</mo><mn>2</mn></mrow></msup></mrow></mfrac></msqrt>
-            </mrow>
-          </math>
-        </div>
-        <span class="ecuacion__num">(3)</span>
-      </figure>
-      <p>Como <math><mo lspace="0" rspace="0">|</mo><mi>α</mi><mo lspace="0" rspace="0">|</mo><mo>∝</mo><mo stretchy="false">(</mo><msub><mi>T</mi><mi>c</mi></msub><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo></math> y <math><msub><mi>n</mi><mi>s</mi></msub><mo>∝</mo><mo lspace="0" rspace="0">|</mo><mi>α</mi><mo lspace="0" rspace="0">|</mo></math>, ambas longitudes divergen igual cerca de la transición:</p>
-      <figure class="ecuacion">
-        <div class="ecuacion-scroll">
-          <math display="block">
-            <mrow>
-              <mi>ξ</mi><mo>,</mo><mspace width="0.3em"></mspace><mi>λ</mi><mo>∝</mo>
-              <msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mfrac><mi>T</mi><msub><mi>T</mi><mi>c</mi></msub></mfrac><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn><mo>/</mo><mn>2</mn></mrow></msup>
-            </mrow>
-          </math>
-        </div>
-        <span class="ecuacion__num">(4)</span>
-      </figure>
+      <div class="ecuacion">
+        $$ \lambda(T) = \sqrt{\frac{m^*}{\mu_0\, n_s\, e^{*2}}} \tag{3} $$
+      </div>
+      <p>Como $\abs{\alpha} \propto (\tc - T)$ y $n_s \propto \abs{\alpha}$, ambas longitudes divergen igual cerca de la transición:</p>
+      <div class="ecuacion">
+        $$ \xi,\ \lambda \;\propto\; \left(1 - \frac{T}{\tc}\right)^{-1/2} \tag{4} $$
+      </div>
 
-      <!-- 4 -->
       <section id="kappa" aria-labelledby="h-kappa">
         <h2 id="h-kappa"><span class="num">4</span>El parámetro κ</h2>
       </section>
-      <figure class="ecuacion">
-        <div class="ecuacion-scroll">
-          <math display="block"><mrow><mi>κ</mi><mo>=</mo><mfrac><mi>λ</mi><mi>ξ</mi></mfrac></mrow></math>
-        </div>
-        <span class="ecuacion__num">(5)</span>
-      </figure>
-      <p>Por (4), el cociente no depende de la temperatura cerca de <math><msub><mi>T</mi><mi>c</mi></msub></math>, así que caracteriza al material.</p>
+      <div class="ecuacion">
+        $$ \kappa = \frac{\lambda}{\xi} \tag{5} $$
+      </div>
+      <p>Por (4), el cociente no depende de la temperatura cerca de $\tc$, así que caracteriza al material. Los dos regímenes se separan en $\kappa = 1/\sqrt{2}$:</p>
+      <div class="ecuacion">
+        $$
+        \begin{aligned}
+          \kappa &\lt \tfrac{1}{\sqrt{2}} &&\Rightarrow\ \sigma_{ns} \gt 0 &&\text{(tipo I)}\\[2pt]
+          \kappa &\gt \tfrac{1}{\sqrt{2}} &&\Rightarrow\ \sigma_{ns} \lt 0 &&\text{(tipo II)}
+        \end{aligned}
+        \tag{6}
+        $$
+      </div>
 
       <div class="recuadro">
         <p class="etiqueta">Para recordar</p>
         <ul>
-          <li><math><mi>κ</mi><mo>&lt;</mo><mn>1</mn><mo>/</mo><msqrt><mn>2</mn></msqrt></math>: tipo&nbsp;I. La energía de la interfase normal–superconductor es positiva y no se forman vórtices.</li>
-          <li><math><mi>κ</mi><mo>&gt;</mo><mn>1</mn><mo>/</mo><msqrt><mn>2</mn></msqrt></math>: tipo&nbsp;II. Entre <math><msub><mi>H</mi><mrow><mi>c</mi><mn>1</mn></mrow></msub></math> y <math><msub><mi>H</mi><mrow><mi>c</mi><mn>2</mn></mrow></msub></math> aparece el estado mixto.</li>
+          <li>$\kappa \lt 1/\sqrt{2}$: tipo&nbsp;I. La energía de la interfase normal–superconductor $\sigma_{ns}$ es positiva y no se forman vórtices.</li>
+          <li>$\kappa \gt 1/\sqrt{2}$: tipo&nbsp;II. Entre $H_{c1}$ y $H_{c2}$ aparece el estado mixto.</li>
         </ul>
       </div>
 
