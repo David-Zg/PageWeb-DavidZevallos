@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>David Zevallos · Física</title>
+  <meta name="description" content="Apuntes de clase y cosas curiosas de David Zevallos, físico en la UNMSM.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%2317202B'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='24' font-weight='700' fill='%23F4F6F3' text-anchor='middle'%3EDZ%3C/text%3E%3C/svg%3E">
+
+  <!-- Aplica el tema guardado antes de pintar, para evitar parpadeo -->
+  <script>
+    try {
+      var t = localStorage.getItem('tema');
+      if (t === 'claro' || t === 'oscuro') document.documentElement.dataset.tema = t;
+    } catch (e) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body data-pagina="inicio">
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html" aria-label="David Zevallos, inicio">
+        <span class="marca__sello" aria-hidden="true">DZ</span>
+        <span class="marca__nombre">David Zevallos</span>
+      </a>
+
+      <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav id="menu-principal" class="menu" aria-label="Secciones">
+        <a href="#apuntes">Apuntes</a>
+        <a href="#curiosidades">Curiosidades</a>
+        <!-- <a href="#fotos">Fotos</a> -->
+        <a href="#sobre-mi">Sobre mí</a>
+        <button class="tema-boton" type="button" aria-label="Cambiar a tema oscuro">
+          <svg class="icono-luna" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="icono-sol" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- PORTADA -->
+    <section class="portada contenedor" aria-labelledby="titulo-portada">
+      <div class="portada__texto">
+        <p class="etiqueta">Cuaderno abierto · Lima, Perú</p>
+        <h1 id="titulo-portada" class="portada__titulo">David Zevallos</h1>
+        <p class="portada__intro">Estudio física y trabajo con superconductores mesoscópicos. Aquí guardo mis apuntes de clase y las cosas curiosas que voy encontrando.</p>
+        <div class="acciones">
+          <a class="boton boton--lleno" href="#apuntes">
+            Ver apuntes
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <!-- <a class="boton boton--borde" href="#fotos">Fotos</a> -->
+        </div>
+      </div>
+
+      <aside class="ficha" aria-label="Tema de investigación">
+        <div class="ficha__cabeza"><span>Ec. (1)</span><span>Tesis de maestría</span></div>
+        <div class="ecuacion-scroll">
+          <math display="block">
+            <mrow>
+              <mi mathvariant="normal">Δ</mi><msub><mi>S</mi><mi>M</mi></msub>
+              <mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>H</mi><mo stretchy="false">)</mo>
+              <mo>=</mo>
+              <msub><mi>μ</mi><mn>0</mn></msub>
+              <msubsup><mo>∫</mo><mn>0</mn><mi>H</mi></msubsup>
+              <msub>
+                <mrow><mo>(</mo><mfrac><mrow><mo>∂</mo><mi>M</mi></mrow><mrow><mo>∂</mo><mi>T</mi></mrow></mfrac><mo>)</mo></mrow>
+                <msup><mi>H</mi><mo>′</mo></msup>
+              </msub>
+              <mspace width="0.2em"></mspace>
+              <mi mathvariant="normal">d</mi><msup><mi>H</mi><mo>′</mo></msup>
+            </mrow>
+          </math>
+        </div>
+        <p class="ficha__nota">Cambio de entropía magnética: la base del efecto magnetocalórico en superconductores tipo I.</p>
+      </aside>
+    </section>
+
+    <!-- APUNTES -->
+    <section id="apuntes" class="banda" aria-labelledby="titulo-apuntes">
+      <div class="contenedor seccion">
+        <div class="seccion__cabeza">
+          <div>
+            <p class="etiqueta etiqueta--clara">Apuntes de clase</p>
+            <h2 id="titulo-apuntes" class="seccion__titulo">Lo que escribo en clase, pasado en limpio</h2>
+          </div>
+          <p class="contador" id="contador-apuntes" aria-live="polite"></p>
+        </div>
+
+        <div class="herramientas">
+          <div class="filtros" id="filtros" role="group" aria-label="Filtrar por curso"></div>
+          <label class="buscador">
+            <span class="visualmente-oculto">Buscar apuntes</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="buscar" type="search" placeholder="Buscar un tema…" autocomplete="off">
+          </label>
+        </div>
+
+        <ol class="lista-apuntes" id="lista-apuntes"></ol>
+        <p class="vacio" id="sin-resultados" hidden>No hay apuntes que coincidan. Prueba con otro curso o palabra.</p>
+      </div>
+    </section>
+
+    <!-- CURIOSIDADES -->
+    <section id="curiosidades" class="contenedor seccion" aria-labelledby="titulo-curiosidades">
+      <div class="seccion__cabeza">
+        <div>
+          <p class="etiqueta etiqueta--calida">Cosas curiosas</p>
+          <h2 id="titulo-curiosidades" class="seccion__titulo">Datos que no entran en el examen</h2>
+        </div>
+      </div>
+      <div class="rejilla-curiosidades" id="lista-curiosidades"></div>
+    </section>
+
+    <!-- FOTOS (oculta por ahora: quita este comentario para mostrarla)
+    <section id="fotos" class="seccion-borde" aria-labelledby="titulo-fotos">
+      <div class="contenedor seccion">
+        <div class="seccion__cabeza">
+          <div>
+            <p class="etiqueta">Fotos</p>
+            <h2 id="titulo-fotos" class="seccion__titulo">Del laboratorio y de fuera</h2>
+          </div>
+          <p class="contador">Toca una foto para verla completa</p>
+        </div>
+        <div class="galeria" id="galeria"></div>
+      </div>
+    </section>
+    -->
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="superficie seccion-borde" aria-labelledby="titulo-sobre-mi">
+      <div class="contenedor seccion sobre-mi">
+        <div class="sobre-mi__cabeza">
+          <p class="etiqueta">Sobre mí</p>
+          <h2 id="titulo-sobre-mi" class="seccion__titulo">Hola, soy David</h2>
+        </div>
+        <div class="sobre-mi__texto">
+          <p>Estudio la maestría en Física en la Facultad de Ciencias Físicas de la UNMSM y trabajo en el Laboratorio de Cerámicos y Nanomateriales. Mi tema es el efecto magnetocalórico en superconductores mesoscópicos tipo I, que estudio con simulaciones numéricas.</p>
+          <div class="cita">
+            <span class="etiqueta">Publicación</span>
+            <p>Zevallos G. et al. (2026). [Título del artículo]. <i>Journal of Superconductivity and Novel Magnetism</i>.</p>
+          </div>
+          <ul class="enlaces">
+            <li>
+              <span id="correo">tu.correo@ejemplo.com</span>
+              <button class="copiar" type="button" data-copiar="correo">Copiar</button>
+            </li>
+            <li><a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a></li>
+            <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie superficie">
+    <div class="contenedor pie__fila">
+      <span>© <span id="anio">2026</span> David Zevallos</span>
+      <span>Hecho a mano, entre clase y clase</span>
+    </div>
+  </footer>
+
+  <!-- VISOR DE FOTOS (elemento nativo <dialog>) -->
+  <dialog class="visor" id="visor" aria-label="Visor de fotos">
+    <div class="visor__marco">
+      <div class="visor__imagen" id="visor-imagen"></div>
+      <div class="visor__barra">
+        <p class="visor__pie" id="visor-pie"></p>
+        <div class="visor__controles">
+          <button type="button" id="visor-anterior" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <span id="visor-posicion" class="visor__posicion"></span>
+          <button type="button" id="visor-siguiente" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" id="visor-cerrar" aria-label="Cerrar visor">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <noscript>
+    <p class="contenedor vacio">Activa JavaScript para ver la lista de apuntes y las curiosidades.</p>
+  </noscript>
+</body>
+</html>
