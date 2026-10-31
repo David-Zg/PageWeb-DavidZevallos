@@ -14,12 +14,12 @@ window.SITIO = {
 
   apuntes: [
     {
-      titulo: 'Densidad de estados proyecta',
+      titulo: 'Densidad de estados proyectados',
       curso: 'Física Computacional',
       fecha: '2026-10-31',
       paginas: 5,
       etiquetas: ['Densidad de estados', 'QuantumEsspreso'],
-      url: 'apuntes/fisica_computacional.html',
+      url: 'apuntes/fisicacomputacional.html',
       pdf: ''
     },
     {
