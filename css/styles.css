@@ -1011,3 +1011,24 @@ a.vecino:hover { border-color: var(--tinta); color: var(--tinta); }
   .visor-foto__barra { position: sticky; bottom: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .impresion--grande.cambiando { animation: none; } }
+
+.figura {
+  margin: 2rem auto;
+  text-align: center;
+}
+.figura img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.figura figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.4;
+}
+.figura__num {
+  font-weight: 600;
+}

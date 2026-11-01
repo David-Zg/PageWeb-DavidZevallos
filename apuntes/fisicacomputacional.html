@@ -41,7 +41,7 @@
         <a href="../index.html#apuntes" aria-current="page">Apuntes</a>
         <a href="../index.html#curiosidades">Curiosidades</a>
         <a href="../index.html#libros">Libros</a>
-        <a href="../index.html#fotos">Fotos</a>
+        <a href="../index.html#fotos" hidden>Fotos</a>
         <a href="../index.html#sobre-mi">Sobre mí</a>
         <button class="tema-boton" type="button" aria-label="Cambiar a tema oscuro">
           <svg class="icono-luna" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -56,52 +56,83 @@
     <article class="nota">
       <!-- 1. Cambia curso, clase, fecha y páginas -->
       <p class="nota__meta">
-        <strong>[Curso]</strong>
-        <span>Clase [N]</span>
-        <time datetime="2026-01-01">01 ene 2026</time>
-        <span>[N] pág.</span>
+        <strong>Tópicas de Física Computacional</strong>
+        <span>Clase 2026-10-31</span>
+        <time datetime="2026-10-31">31 de Octubre de 2026</time>
+        <span>5 pág.</span>
       </p>
       <h1 class="nota__titulo">Densidad de estados</h1>
-      <p class="nota__entrada">Un estudio del curos de Física Computacional</p>
+      <p class="nota__entrada">Un estudio del curso de Física Computacional</p>
 
       <!-- 2. Cada sección: un id (para el índice lateral) y su título -->
       <section id="seccion-1" aria-labelledby="h-seccion-1">
-        <h2 id="h-seccion-1"><span class="num">1</span>[Primera sección]</h2>
+        <h2 id="h-seccion-1"><span class="num">1</span>La periocidad del sólido</h2>
       </section>
-      <p>Texto con matemática en línea: la energía es $E_n = \hbar\omega\left(n + \tfrac12\right)$.</p>
-
-      <!-- Ecuación numerada: va dentro de <div class="ecuacion"> con \tag{n} -->
+      <p>
+        Un sólido cristalino es periódico ante traslaciones periódicas, es decir, si desplazas mediante vectores se ve exactamente igual, pero esos vectores tienen una forma particular
+      </p>
       <div class="ecuacion">
-        $$ \hat{H}\ket{n} = E_n\ket{n} \tag{1} $$
+        $$\mathbf{R} = n_1 \mathbf{a_1} +  n_2 \mathbf{a_2} +  n_3 \mathbf{a_3}~, ~~~~~ n_j \in \mathbb{Z}$$
       </div>
-
-      <!-- Varias líneas alineadas -->
-      <div class="ecuacion">
-        $$
-        \begin{aligned}
-          \hat{a}\ket{n} &= \sqrt{n}\,\ket{n-1} \\
-          \hat{a}^\dagger\ket{n} &= \sqrt{n+1}\,\ket{n+1}
-        \end{aligned}
-        \tag{2}
-        $$
-      </div>
-
-      <!-- Ecuación sin número: sin \tag -->
-      <div class="ecuacion">
-        $$ \comm{\hat a}{\hat a^\dagger} = 1 $$
-      </div>
+      <p>
+        donde $\mathbf{a_1}$, $\mathbf{a_2}$ y $\mathbf{a_3}$ son los vectores primitivos de red.
+      </p>
+      <figure class="figura">
+        <img src="imgFC/red-cristalina.png"
+              alt="Red cristalina con los vectores primitivos a1, a2 y a3"
+              loading="lazy" width="500" height="900">
+        <figcaption>
+          <span class="figura__num">Figura 1.</span>
+          Red cristalina y sus vectores primitivos $\mathbf{a_1}$,$\mathbf{a_2}$ y $\mathbf{a_3}$.
+        </figcaption>
+      </figure>
+      <p>
+        Vemos en la figura que la celda unidad (rectangulo morado) puede ser trasladado por los vectores primitivos en todo el espacio $\mathbf{R}$, en términos físicos lo que pase en la celda morada pasará de la misma manera en la celda verde y amarilla.
+      </p>
 
       <section id="seccion-2" aria-labelledby="h-seccion-2">
-        <h2 id="h-seccion-2"><span class="num">2</span>[Segunda sección]</h2>
+        <h2 id="h-seccion-2"><span class="num">2</span>El Hamiltoniano tiene la simetría de la red</h2>
       </section>
-      <p>[Texto…] Recuerda: escribe <code>\lt</code> y <code>\gt</code> en vez de &lt; y &gt;.</p>
+      <p>
+        El hamiltoniano
+      </p>
+      <div class="ecuacion">
+        $$
+        \hat{H} = \frac{\mathbf{\hat{p}}^2}{2m} + U(\mathbf{r})~,~~~{\mathbf{\hat{p}}} = -i \hbar \nabla
+        $$
+      </div>
+      <p>
+        y dado que el espacio $\mathbf{R}$ está construido por los vectores primitivos ambos términos son invariantes ante traslación. La energía potencial $U(\mathbf{r}) = U(\mathbf{r} + \mathbf{R})$ y para la energía cinética el operador $\nabla$ es el mismo en $\mathbf{r}$ y en $\mathbf{r} + \mathbf{R}$ por tanto
+      </p>
+      <div class="ecuacion">
+        $$
+        \hat{H} = \hat{H}(\mathbf{r} + \mathbf{R})
+        $$
+      </div>
 
-      <div class="recuadro">
+       <p>
+        El módulo al cuadrado de la función de onda $\left| \psi\right|^2$ es periódico en $\mathbf{R},~\psi \in \mathbb{C}$ (red de Bravais). Y, la función de onda compleja puede tener el mismo módulo y diferir en una fase, $\psi(\mathbf{r} + \mathbf{R}) = e^{i\theta(\mathbf{R})} \psi(\mathbf{r})$ (Teorema de Bloch), la fase da origen al vector de onda $\mathbf{k}$.
+       </p> 
+       <p>
+        Escribamos la función de onda como una superposición de ondas planas con vectores $q$ arbitrarios
+       </p>
+       <div class="ecuacion">
+        $$
+        \psi(r) = \sum_{q} e^{iq\cdot r} C_q
+        $$
+       </div>
+       <div class="recuadro">
         <p class="etiqueta">Para recordar</p>
         <ul>
-          <li>[Idea clave con LaTeX: $\expval{\hat x} = 0$]</li>
+          <li>
+            Recordar que al trasladarnos por el espacio $\mathbf{R}$ el hamiltoniano no debe cambiar, por tanto la probabilidad de encontrar al electron debe ser la misma, sin embargo al tratarse de una función compleja esta difiere en fase.
+          </li>
+          <li>
+            La fase da origen al vector de onda $\mathbf{k}$.
+          </li>
         </ul>
       </div>
+
 
       <!-- 3. Cambia data-url por la ruta de ESTE archivo -->
       <nav class="vecinos" id="vecinos" data-url="apuntes/NOMBRE-DEL-ARCHIVO.html" aria-label="Otros apuntes"></nav>
