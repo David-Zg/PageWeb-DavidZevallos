@@ -14,6 +14,15 @@ window.SITIO = {
 
   apuntes: [
     {
+      titulo: 'Campo desmagnetizante y los factores N',
+      curso: 'Física del Estado Sólido',
+      fecha: '2026-10-31',
+      paginas: 5,
+      etiquetas: ['Magnetismo', 'Cuántica'],
+      url: 'apuntes/fisicasolido.html',
+      pdf: '../pdf/Campo_desmagnetizante_factores_N.pdf'
+    },
+    {
       titulo: 'Densidad de estados proyectados',
       curso: 'Física Computacional',
       fecha: '2026-10-31',

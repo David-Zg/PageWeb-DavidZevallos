@@ -101,7 +101,7 @@ body {
 }
 
 [hidden] { display: none !important; }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 a { color: var(--acento); text-underline-offset: 0.18em; }
@@ -474,6 +474,16 @@ a.vecino:hover { border-color: var(--tinta); color: var(--tinta); }
   background: var(--superficie); border: 1.5px solid var(--tinta);
 }
 .pdf-caja .hueco { height: 180px; }
+.pdf-caja__visor {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 42vh, 420px);   /* miniatura de la página, sin pasarse del alto de pantalla */
+  border: 1px solid var(--linea);
+  background: var(--hueco);
+}
+@media (max-width: 760px) {
+  .pdf-caja__visor { display: none; }   /* en celular solo queda el botón "Abrir PDF" */
+}
 .pdf-caja .boton { justify-content: center; }
 
 .indice { display: flex; flex-direction: column; font-family: var(--f-dato); font-size: 0.875rem; }
@@ -1025,10 +1035,13 @@ a.vecino:hover { border-color: var(--tinta); color: var(--tinta); }
 }
 .figura figcaption {
   margin-top: 0.6rem;
-  font-size: 0.9em;
-  color: #555;
+  font-family: var(--f-dato);
+  font-size: 0.8125rem;
+  color: var(--gris);
   line-height: 1.4;
 }
-.figura__num {
-  font-weight: 600;
-}
+.figura__num { font-weight: 600; color: var(--tinta-2); }
+
+/* Lista de apuntes: solo se ven los primeros */
+.lista-apuntes > li.recortado { display: none !important; }
+.mas-apuntes { display: block; margin: 8px auto 0; }
